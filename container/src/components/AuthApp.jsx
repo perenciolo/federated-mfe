@@ -1,8 +1,8 @@
-import { mount } from "marketing/marketing-mfe";
+import { mount } from "auth/auth-mfe";
 import React, { useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 
-export default function App() {
+export default function App({ onSignIn }) {
   const ref = useRef(null);
   const history = useHistory();
 
@@ -16,6 +16,7 @@ export default function App() {
             history.push(nexPathName);
           }
         },
+        onSignIn,
       });
       history.listen(onParentNavigate);
     }
