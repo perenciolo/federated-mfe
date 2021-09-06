@@ -10,6 +10,7 @@ declare module 'default' {
       onSignIn?: () => void;
     }
   ) => { onParentNavigate: LocationListener };
+
   export const mount: Mount;
 }
 
