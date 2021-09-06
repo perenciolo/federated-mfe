@@ -1,0 +1,6 @@
+{
+  "name": "marketing",
+  "exposes": {
+    "./marketing-mfe": "./src/bootstrap"
+  }
+}

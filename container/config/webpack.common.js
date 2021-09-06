@@ -1,10 +1,10 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"],
-    modules: [path.resolve(__dirname, "src"), "node_modules"],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
   },
   module: {
     rules: [
@@ -12,18 +12,33 @@ module.exports = {
         test: /\.m?(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-react", "@babel/preset-env"],
-            plugins: ["@babel/plugin-transform-runtime"],
+            presets: ['@babel/preset-react', '@babel/preset-env', '@babel/preset-typescript'],
+            plugins: [
+              '@babel/plugin-transform-runtime',
+              '@babel/plugin-proposal-optional-chaining',
+            ],
           },
         },
+      },
+      {
+        test: /\.pug$/,
+        use: ['pug-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader'],
+      },
+      {
+        test: /\.s?css$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./public/index.html",
+      template: './public/index.pug',
     }),
   ],
 };

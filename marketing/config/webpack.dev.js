@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const commonConfig = require("./webpack.common");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const packageDeps = require('../package.json').dependencies
+const federationConfig = require('../federation.config.json')
 
 const devConfig = {
   mode: "development",
@@ -17,12 +18,9 @@ const devConfig = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "marketing",
       filename: "remoteEntry.js",
-      exposes: {
-        "./marketing-mfe": "./src/bootstrap",
-      },
-      shared: packageDeps
+     ...federationConfig,
+      shared: {...packageDeps}
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
